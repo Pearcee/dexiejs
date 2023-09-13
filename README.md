@@ -1,2 +1,3 @@
 # dexiejs
 dexie
+test
