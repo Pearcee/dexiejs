@@ -1,4 +1,4 @@
-var db = new Dexia("FriendDatabase");
+var db = new Dexie("FriendDatabase");
 
 // DB with single table "friends" with primary key "id" and
 // indexes on properties "name" and "age"
@@ -21,7 +21,7 @@ db.friends.bulkPut([
 
 }).then(friends => {
 
-    alert("Found young friends: " +
+    console.log("Found young friends: " +
         friends.map(friend => friend.name));
 
     return db.friends
@@ -31,17 +31,17 @@ db.friends.bulkPut([
 
 }).then(friends => {
 
-    alert("Friends in reverse age order: " +
+    console.log("Friends in reverse age order: " +
         friends.map(friend => `${friend.name} ${friend.age}`));
 
     return db.friends.where('name').startsWith("S").keys();
 
 }).then(friendNames => {
 
-    alert("Friends on 'S': " + friendNames);
+    console.log("Friends on 'S': " + friendNames);
 
 }).catch(err => {
 
-    alert("Ouch... " + err);
+    console.log("Ouch... " + err);
 
 });
