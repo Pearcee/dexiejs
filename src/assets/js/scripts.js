@@ -31,8 +31,9 @@ const populateNewDiv = async () => {
   appTable.innerHTML = allItems.map(item => `
 
   <tr>
-    <td class="w3-col m10">${item.name}</td>
+    <td class="w3-col m9">${item.name}</td>
     <td class="w3-col m1 w3-right-align">${item.age}</td>
+    <td class="w3-col m1 w3-button w3-center"  onclick="this.parentElement.style.display='none'">&add;</span></td>
     <td class="w3-col m1 w3-button w3-center"  onclick="this.parentElement.style.display='none'">&times;</span></td>
   </tr>
 
