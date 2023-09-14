@@ -45,3 +45,5 @@ db.friends.bulkPut([
     console.log("Ouch... " + err);
 
 });
+
+

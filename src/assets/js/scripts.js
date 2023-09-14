@@ -1,5 +1,48 @@
-// var acc = document.getElementsByClassName("accordion");
-// var i;
+const db = new Dexie('NameApp')
+
+db.version(1).stores({ names: '++id,name,age' })
+
+db.names.bulkPut([
+  { id: 1, name: "Josephine", age: 21 },
+  { id: 2, name: "Per", age: 75 },
+  { id: 3, name: "Simon", age: 5 },
+  { id: 4, name: "Sara", age: 50, notIndexedProperty: 'foo' }
+])
+
+
+const appNav = document.getElementById('appNav')
+const appHead = document.getElementById('appHead')
+const appAdd = document.getElementById('appAdd')
+const appTable = document.getElementById('appTable')
+const appFoot = document.getElementById('appFoot')
+
+
+appInput.onsubmit = async (event) => {
+  event.preventDefault()
+  const name = document.getElementById('nameInput').value
+  const age = document.getElementById('ageInput').value
+  await db.names.add({ name, age })
+  await populateNewDiv()
+  appInput.reset()
+}
+
+const populateNewDiv = async () => {
+  const allItems = await db.names.reverse().toArray()
+  appTable.innerHTML = allItems.map(item => `
+
+  <tr>
+    <td class="w3-col m10">${item.name}</td>
+    <td class="w3-col m1 w3-right-align">${item.age}</td>
+    <td class="w3-col m1 w3-button w3-center"  onclick="this.parentElement.style.display='none'">&times;</span></td>
+  </tr>
+
+  `).join('')
+}
+
+window.onload = populateNewDiv
+
+var acc = document.getElementsByClassName("accordion");
+var i;
 
 
 // function openCity(evt, cityName) {
