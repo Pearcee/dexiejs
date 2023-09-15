@@ -7,90 +7,36 @@
   <meta name="theme-color" content="#317EFB" />
   <meta name="description" content="Landing Page">
   <meta name="Steve" content="SitePoint">
-  <link rel="apple-touch-icon" href="/assets/images/icons-192.png" alt="avatar">
-  <link rel="stylesheet" href="/assets/css//w3.css">
+  <link rel="apple-touch-icon" href="./assets/images/icons-192.png" alt="avatar"> 
   <link rel="stylesheet" href="/assets/css/styles.css">
-  <link rel="shortcut icon" type="image/x-icon" href="/assets/images/favicon.ico">
-  <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> 
-      
-  -->
+  <link rel="stylesheet" href="/assets/css//w3.css">
   <script src="https://unpkg.com/dexie/dist/dexie.js"></script>
   <title>PSteve</title>
 </head>
 
 <body>
-  <nav class="w3-sidebar w3-bar-block w3-card" id="mySidebar">
-    <div class="w3-container w3-theme-d2">
-      <span onclick="closeSidebar()" class="w3-button w3-display-topright w3-large">X</span>
-      <br>
-      <div class="w3-padding w3-center">
-        <!-- <img class="w3-circle" src="/assets/images/icons-192.png" alt="avatar" style="width:75%"> -->
-      </div>
-    </div>
-    <a class="w3-bar-item w3-button" href="#">Movies</a>
-    <a class="w3-bar-item w3-button" href="#">Friends</a>
-    <a class="w3-bar-item w3-button" href="#">Messages</a>
-  </nav>
-
-  <header class="w3-top w3-bar w3-theme">
-    <button class="w3-bar-item w3-button w3-xxxlarge w3-hover-theme" onclick="openSidebar()">&#9776;</button>
-    <h1 class="w3-bar-item">Movies</h1>
-  </header>
-
-  <div class="w3-container" style="margin-top:90px">
-
+  <div id="myDIV" class="header">
+    <h2 style="margin:5px">My To Do List</h2>
+    <input type="text" id="myInput" placeholder="Note...">
+    <span onclick="newElement()" class="addBtn">Add</span>
   </div>
 
-  <div id="appNav></div>
-  <div id=" appHead></div>
+  <ul id="myUL">
+    <li>Hit the gym</li>
+    <li>Pay bills</li>
+    <li>Meet George</li>
+    <li>Buy eggs</li>
+    <li>Read a book</li>
+    <li>Organize office</li>
+  </ul>
 
-  <div class="w3-row-padding w3-container" id="createNewDiv">
-    <form id="appInput">
-      <label>
-        <input type="text" id="nameInput" required placeholder="Name" class="w3-col m10 w3-input w3-border">
-      </label>
-
-      <label>
-        <input type="number" id="ageInput" placeholder="Age" class="w3-col m1 w3-input w3-border">
-      </label>
-      <button type="submit" id="addButton" class="w3-col m1 w3-button  w3-black "><span>+</span>
-        Create</button>
-    </form>
-  </div>
+  
+  <div id="appAddNote" class="w3-ul w3-card-4"></div>
 
 
-  <section>
-    <div class="w3-container">
-      <table class="w3-table w3-striped">
-        <tr>
-          <th class="w3-col m10">Name</th>
-          <th class="w3-col m1">Age</th>
-          <th class="w3-col m1">Edit/th>
-          <th class="w3-col m1">Delete</th>
-        </tr>
-        <tr class="w3-table " id="appTable"> </tr>
-        </table>
-      </div>
+  <div id="appListNotes" class="w3-ul w3-card-4 w3-hoverable"></div>
 
-  </section>
-
-
-  <div id=" appFoot></div>
-
-  <footer class=" w3-container w3-bottom w3-theme w3-margin-top">
-    <div class="w3-medium w3-padding-16 w3-center">
-      <i class="fa fa-facebook-official w3-hover-opacity"></i>
-      <i class="fa fa-instagram w3-hover-opacity"></i>
-      <i class="fa fa-snapchat w3-hover-opacity"></i>
-      <i class="fa fa-pinterest-p w3-hover-opacity"></i>
-      <i class="fa fa-twitter w3-hover-opacity"></i>
-      <i class="fa fa-linkedin w3-hover-opacity"></i>
-      <i></i>
-      <a class="w3-hover-opacity" href="https://www.w3schools.com/w3css/default.asp" target="_blank"> w3.css</a>
-    </div>
-    </footer>
-    <script src="/assets/js/scripts.js"></script>
-    <!-- <script src="/assets/js/dixiescripts.js"></script> -->
+  <script src="/assets/js/scripts.js"></script>
 </body>
 
 </html>

@@ -1,83 +1,87 @@
-const db = new Dexie('NameApp')
-
-db.version(1).stores({ names: '++id,name,age' })
-
-db.names.bulkPut([
-  { id: 1, name: "Josephine", age: 21 },
-  { id: 2, name: "Per", age: 75 },
-  { id: 3, name: "Simon", age: 5 },
-  { id: 4, name: "Sara", age: 50, notIndexedProperty: 'foo' }
-])
-
+const db = new Dexie('NoteApp')
 
 const appNav = document.getElementById('appNav')
 const appHead = document.getElementById('appHead')
-const appAdd = document.getElementById('appAdd')
-const appTable = document.getElementById('appTable')
+const appListNotes = document.getElementById('appListNotes')
+const appAddNote = document.getElementById('appAddNote')
 const appFoot = document.getElementById('appFoot')
 
+db.version(2).stores({ notes: '++id,note, done' })
 
-appInput.onsubmit = async (event) => {
-  event.preventDefault()
-  const name = document.getElementById('nameInput').value
-  const age = document.getElementById('ageInput').value
-  await db.names.add({ name, age })
-  await populateNewDiv()
-  appInput.reset()
-}
+db.notes.bulkPut([
+  { id: 1, note: "Josephine", done: 0 },
+  { id: 2, note: "Per", done: 0},
+  { id: 3, note: "Simon", done: 0 },
+  { id: 4, note: "Sara", done: 0, notIndexedProperty: 'foo' }
+])
+
+appAddNote.innerHTML =  `
+<h2 >My Add Note</h2>
+`
 
 const populateNewDiv = async () => {
-  const allItems = await db.names.reverse().toArray()
-  appTable.innerHTML = allItems.map(item => `
+  const allItems = await db.notes.reverse().toArray()
+  appListNotes.innerHTML = allItems.map(item => `
 
-  <tr>
-    <td class="w3-col m9">${item.name}</td>
-    <td class="w3-col m1 w3-right-align">${item.age}</td>
-    <td class="w3-col m1 w3-button w3-center"  onclick="this.parentElement.style.display='none'">&add;</span></td>
-    <td class="w3-col m1 w3-button w3-center"  onclick="this.parentElement.style.display='none'">&times;</span></td>
-  </tr>
+    <li class="w3-display-container"> ${item.note}  <span onclick="this.parentElement.style.display='none'" class="w3-button w3-transparent w3-display-right">&times;</span> </li>
 
-  `).join('')
+    `).join('')
 }
 
 window.onload = populateNewDiv
 
-var acc = document.getElementsByClassName("accordion");
+// Create a "close" button and append it to each list item
+var myNodelist = document.getElementsByTagName("LI");
 var i;
-
-
-// function openCity(evt, cityName) {
-//     var i, tabcontent, tablinks;
-//     tabcontent = document.getElementsByClassName("tabcontent");
-//     for (i = 0; i < tabcontent.length; i++) {
-//       tabcontent[i].style.display = "none";
-//     }
-//     tablinks = document.getElementsByClassName("tablinks");
-//     for (i = 0; i < tablinks.length; i++) {
-//       tablinks[i].className = tablinks[i].className.replace(" active", "");
-//     }
-//     document.getElementById(cityName).style.display = "block";
-//     evt.currentTarget.className += " active";
-//   }
-
-
-console.log("Its me")
-
-// Used to toggle the menu on small screens when clicking on the menu button
-// function menuFn() {
-//   var x = document.getElementById("navDemo");
-//   if (x.className.indexOf("w3-show") == -1) {
-//     x.className += " w3-show";
-//   } else {
-//     x.className = x.className.replace(" w3-show", "");
-//   }
-// }
-
-closeSidebar();
-function openSidebar() {
-  document.getElementById("mySidebar").style.display = "block";
+for (i = 0; i < myNodelist.length; i++) {
+  var span = document.createElement("SPAN");
+  var txt = document.createTextNode("\u00D7");
+  span.className = "close";
+  span.appendChild(txt);
+  myNodelist[i].appendChild(span);
 }
 
-function closeSidebar() {
-  document.getElementById("mySidebar").style.display = "none";
+// Click on a close button to hide the current list item
+var close = document.getElementsByClassName("close");
+var i;
+for (i = 0; i < close.length; i++) {
+  close[i].onclick = function() {
+    var div = this.parentElement;
+    div.style.display = "none";
+  }
+}
+
+// Add a "checked" symbol when clicking on a list item
+var list = document.querySelector('ul');
+list.addEventListener('click', function(ev) {
+  if (ev.target.tagName === 'LI') {
+    ev.target.classList.toggle('checked');
+  }
+}, false);
+
+// Create a new list item when clicking on the "Add" button
+function newElement() {
+  var li = document.createElement("li");
+  var inputValue = document.getElementById("myInput").value;
+  var t = document.createTextNode(inputValue);
+  li.appendChild(t);
+  if (inputValue === '') {
+    alert("You must write something!");
+  } else {
+    document.getElementById("myUL").appendChild(li);
+  }
+  document.getElementById("myInput").value = "";
+
+  var span = document.createElement("SPAN");
+  var txt = document.createTextNode("\u00D7");
+  span.className = "close";
+  span.appendChild(txt);
+  li.appendChild(span);
+
+  for (i = 0; i < close.length; i++) {
+    close[i].onclick = function() {
+      var div = this.parentElement;
+      div.style.display = "none";
+    }
+  }
 }

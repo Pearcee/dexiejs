@@ -1,3 +1,5 @@
+
+<style>
 body {
   margin: 0;
   min-width: 250px;
@@ -77,7 +79,7 @@ ul li.checked::before {
 
 /* Style the header */
 .header {
-  background-color: #000;
+  background-color: #f44336;
   padding: 30px 40px;
   color: white;
   text-align: center;
@@ -118,3 +120,4 @@ input {
 .addBtn:hover {
   background-color: #bbb;
 }
+</style>
